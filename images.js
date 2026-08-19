@@ -150,11 +150,14 @@ async function loadTemplateImages() {
                 if (dataURL) {
                     imgElement.src = dataURL;
                     imgElement.style.display = 'block';
-                    imgElement.parentElement.classList.add('has-image');
                 }
             } else {
-                imgElement.src = '';
-                imgElement.parentElement.classList.remove('has-image');
+                // Use default placeholder for gallery and article images if no user image
+                if (['image1', 'image2', 'articleImage1', 'articleImage2'].includes(slot)) {
+                    imgElement.src = 'assets/Placeholder.png';
+                } else {
+                    imgElement.src = '';
+                }
             }
         }
     }
