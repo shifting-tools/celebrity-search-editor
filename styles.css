@@ -499,6 +499,7 @@ body {
     background: #f1f3f4;
     border-radius: 8px;
     overflow: hidden;
+    min-height: 80px;
 }
 
 .gallery-image {
