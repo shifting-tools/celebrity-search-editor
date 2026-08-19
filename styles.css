@@ -809,7 +809,7 @@ img[src=""] {
     display: flex;
 }
 
-img:not([src=""]) + .image-placeholder {
+.image-slot.has-image .image-placeholder {
     display: none;
 }
 

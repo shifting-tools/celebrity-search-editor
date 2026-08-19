@@ -143,16 +143,18 @@ async function loadTemplateImages() {
     
     for (const slot of imageSlots) {
         const imageId = appState.images[slot];
-        if (imageId) {
-            const dataURL = await loadImageFromLibrary(imageId);
-            const imgElement = document.getElementById(slot);
-            if (imgElement && dataURL) {
-                imgElement.src = dataURL;
-                imgElement.style.display = 'block';
-                const placeholder = imgElement.parentElement.querySelector('.image-placeholder');
-                if (placeholder) {
-                    placeholder.style.display = 'none';
+        const imgElement = document.getElementById(slot);
+        if (imgElement) {
+            if (imageId) {
+                const dataURL = await loadImageFromLibrary(imageId);
+                if (dataURL) {
+                    imgElement.src = dataURL;
+                    imgElement.style.display = 'block';
+                    imgElement.parentElement.classList.add('has-image');
                 }
+            } else {
+                imgElement.src = '';
+                imgElement.parentElement.classList.remove('has-image');
             }
         }
     }
