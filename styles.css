@@ -32,7 +32,7 @@ body {
 }
 
 .links {
-    width: 280px;
+    width: 250px;
     background: white;
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -40,6 +40,7 @@ body {
     flex-shrink: 0;
     max-height: calc(100vh - 120px);
     overflow-y: auto;
+    margin: 10px;
 }
 
 .toolbar {
@@ -347,8 +348,8 @@ body {
 }
 
 .celebrity-icon {
-    height: 20px;
-    width: 20px;
+    height: 15px;
+    width: 15px;
     object-fit: contain;
     margin-left: 8px;
 }
@@ -390,6 +391,12 @@ body {
     color: #5f6368;
     font-size: 13px;
     cursor: pointer;
+}
+
+.movie-container {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
 }
 
 .songs-grid {
@@ -538,7 +545,7 @@ body {
 
 .facts-section {
     padding: 20px 16px;
-    border-top: 3px solid #000
+    border-top: 3px solid #ddd
 }
 
 .facts-section h3 {
