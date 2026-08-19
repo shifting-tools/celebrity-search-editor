@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celebrity Search Editor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>Celebrity Search Editor</h1>
+            <div class="toolbar">
+                <button id="undoBtn" class="btn" title="Undo (Ctrl+Z)">↶ Undo</button>
+                <button id="redoBtn" class="btn" title="Redo (Ctrl+Shift+Z)">↷ Redo</button>
+                <button id="exportPngBtn" class="btn btn-primary">Export PNG</button>
+                <span class="toolbar-note">(Exporting may take a moment)</span>
+                <button id="resetBtn" class="btn btn-danger">Reset Template</button>
+                <button id="exportProjectBtn" class="btn">Export Project</button>
+                <button id="importProjectBtn" class="btn">Import Project</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="variables-panel">
+                <h3>Variables</h3>
+                <div class="variables-form">
+                    <div class="form-group">
+                        <label for="var-fname">First Name</label>
+                        <input type="text" id="var-fname" data-variable="fname">
+                    </div>
+                    <div class="form-group">
+                        <label for="var-lname">Last Name</label>
+                        <input type="text" id="var-lname" data-variable="lname">
+                    </div>
+                    <div class="form-group">
+                        <label for="var-age">Age</label>
+                        <input type="text" id="var-age" data-variable="age">
+                    </div>
+                    <div class="form-group">
+                        <label for="var-occupation">Occupation</label>
+                        <input type="text" id="var-occupation" data-variable="occupation">
+                    </div>
+                    <div class="form-group">
+                        <label for="var-location">Location</label>
+                        <input type="text" id="var-location" data-variable="location">
+                    </div>
+                    <div class="form-group">
+                        <label for="var-bday">Birth Day</label>
+                        <input type="text" id="var-bday" data-variable="bday">
+                    </div>
+                    <div class="form-group">
+                        <label for="var-bmonth">Birth Month</label>
+                        <input type="text" id="var-bmonth" data-variable="bmonth">
+                    </div>
+                    <div class="form-group">
+                        <label for="var-byear">Birth Year</label>
+                        <input type="text" id="var-byear" data-variable="byear">
+                    </div>
+                    <div class="form-group">
+                        <label for="var-height">Height</label>
+                        <input type="text" id="var-height" data-variable="height">
+                    </div>
+                    <div class="form-group">
+                        <label for="var-group">Music Group</label>
+                        <input type="text" id="var-group" data-variable="group">
+                    </div>
+                </div>
+            </div>
+            <div id="previewCanvas" class="preview-canvas">
+                <div class="top-image-row">
+                    <div class="image-row-middle">
+                        <img src="assets/google.png" alt="Google" class="top-row-image">
+                    </div>
+                    <div class="image-row-right">
+                            <img src="assets/user-profile.png" alt="Account" class="top-row-image">
+                        </div>
+                    </div>
+                    <div class="search-header">
+                        <div class="search-bar">
+                            <img src="assets/magnifying-glass-thin.png" alt="Search" class="search-icon-img">
+                            <span class="search-text" data-variable="name">{fname} {lname}</span>
+                            <img src="assets/microphone-icon.png" alt="Clear" class="search-icon-img">
+                            <span class="search-separator">|</span>
+                            <img src="assets/google-lens.png" alt="Voice" class="search-icon-img">
+                        </div>
+                    </div>
+
+                    <div class="tabs-container">
+                        <div class="tab tab-selected">All</div>
+                        <div class="tab">Images</div>
+                        <div class="tab">Videos</div>
+                        <div class="tab">News</div>
+                        <div class="tab">Shopping</div>
+                    </div>
+
+                    <div class="celebrity-header">
+                        <div class="celebrity-info">
+                            <table class="celebrity-table">
+                                <tr>
+                                    <td class="celebrity-name-cell">
+                                        <h2 class="celebrity-name" data-variable="name">{name}</h2>
+                                    </td>
+                                    <td class="celebrity-icons-cell">
+                                        <img src="assets/vertical-ellipsis.png" alt="More" class="celebrity-icon">
+                                        <img src="assets/share.png" alt="Share" class="celebrity-icon">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="celebrity-occupation-cell">
+                                        <span class="meta-item" data-variable="occupation">{occupation}</span>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                            <div class="images-section">
+                              <div class="images-grid">
+                                  <div class="image-slot">
+                                     <img id="image1" class="gallery-image" src="" alt="Gallery 1" data-image-slot="image1">
+                                     <div class="image-placeholder gallery-placeholder">Click to add</div>
+                                 </div>
+                                 <div class="image-slot">
+                                      <img id="image2" class="gallery-image" src="" alt="Gallery 2" data-image-slot="image2">
+                                     <div class="image-placeholder gallery-placeholder">Click to add</div>
+                                 </div>
+                              </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="info-container">
+                                    <h4 class="info-title">Age</h4>
+                                    <h1 class="info-text" data-variable="age">{age} years</h1>
+                                    <span class="info-date" data-variable="birthdate">{bday} {bmonth} {byear}</span>
+                                </div>
+                                <div class="info-container">
+                                    <h4 class="info-title">Songs</h4>
+                                    <div class="songs-grid">
+                                        <div class="song-image-slot">
+                                            <img id="song1" class="song-image" src="" alt="Song 1" data-image-slot="song1">
+                                            <div class="image-placeholder song-placeholder">+</div>
+                                        </div>
+                                        <div class="song-image-slot">
+                                            <img id="song2" class="song-image" src="" alt="Song 2" data-image-slot="song2">
+                                            <div class="image-placeholder song-placeholder">+</div>
+                                        </div>
+                                        <div class="song-image-slot">
+                                            <img id="song3" class="song-image" src="" alt="Song 3" data-image-slot="song3">
+                                            <div class="image-placeholder song-placeholder">+</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bio-section">
+                     <div class="info-container">
+                        <h5>Overview</h5>
+                        <p class="bio-text" data-variable="bio">{bio}</p>
+                        <div class="website-section">
+                            <a href="#" class="website-link" data-variable="website">{website}</a>
+                        </div>
+                    </div>
+
+                    <div class="article-row">
+                                    <div class="article-container">
+                                        <div class="article-image-wrapper">
+                                            <img id="articleImage1" class="article-image" src="" alt="Article 1" data-image-slot="articleImage1">
+                                            <div class="image-placeholder article-image-placeholder">Click to add</div>
+                                        </div>
+                                        <div class="article-text-wrapper">
+                                            <div class="article-header">
+                                                <div class="article-logo-wrapper">
+                                                    <img id="articleLogo1" class="article-logo" src="" alt="Logo 1" data-image-slot="articleLogo1">
+                                                    <div class="image-placeholder article-logo-placeholder">+</div>
+                                                </div>
+                                                <span class="article-title" data-variable="article1Title">{article1Title}</span>
+                                            </div>
+                                            <p class="article-content" data-variable="article1Text">{article1Text}</p>
+                                            <span class="article-date" data-variable="article1Date">{article1Date}</span>
+                                        </div>
+                                    </div>
+                                    <div class="article-container">
+                                        <div class="article-image-wrapper">
+                                            <img id="articleImage2" class="article-image" src="" alt="Article 2" data-image-slot="articleImage2">
+                                            <div class="image-placeholder article-image-placeholder">Click to add</div>
+                                        </div>
+                                        <div class="article-text-wrapper">
+                                            <div class="article-header">
+                                                <div class="article-logo-wrapper">
+                                                    <img id="articleLogo2" class="article-logo" src="" alt="Logo 2" data-image-slot="articleLogo2">
+                                                    <div class="image-placeholder article-logo-placeholder">+</div>
+                                                </div>
+                                                <span class="article-title" data-variable="article2Title">{article2Title}</span>
+                                            </div>
+                                            <p class="article-content" data-variable="article2Text">{article2Text}</p>
+                                            <span class="article-date" data-variable="article2Date">{article2Date}</span>
+                                        </div>
+                                    </div>
+                    </div>
+                    <div class="facts-section">
+                            <table class="celebrity-table">
+                                <tr>
+                                    <td class="celebrity-name-cell">
+                                        <h3>Quick Facts</h3>
+                                    </td>
+                                    <td class="celebrity-icons-cell">
+                                        <img src="assets/vertical-ellipsis.png" alt="More" class="celebrity-icon">
+                                        <img src="assets/share.png" alt="Share" class="celebrity-icon">
+                                    </td>
+                                </tr>
+                            </table>
+                        <div class="fact-item">
+                            <h4>Born: </h4>
+                            <p data-variable="born">{bday} {bmonth} {byear} ({age} years), {location}</p>
+                        </div>
+                        <div class="fact-item">
+                            <h4>Education: </h4>
+                            <span class="fact-value" data-variable="school">{school}</span>
+                        </div><div class="fact-item">
+                            <h4>Full name: </h4>
+                            <span class="fact-value" data-variable="fname lname">{fname} {lname}</span>
+                        </div>
+                        <div class="fact-item">
+                            <h4>Height: </h4>
+                            <span class="fact-value" data-variable="height">{height}</span>
+                        </div>
+                        <div class="fact-item">
+                            <h4>Music group: </h4>
+                            <span class="fact-value" data-variable="group">{group}</span>
+                        </div>
+                </div>
+                <div class="facts-section">
+                    <div class="celebrity-name-cell">
+                        <h3>People also ask</h3>
+                    </div>
+                    <div class="collapsible-fact-item" data-collapsible-id="custom1">
+                        <div class="collapsible-header">
+                            <h4 class="collapsible-title">What languages can Hyunjin speak?</h4>
+                            <img src="assets/down-arrow.png" alt="Expand" class="collapsible-toggle">
+                        </div>
+                            <div class="collapsible-content">
+                                <span class="collapsible-value">Hyunjin can speak Korean fluently, and has learnt English and Japanese through study.</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="collapsible-fact-item" data-collapsible-id="custom2">
+                        <div class="collapsible-header">
+                            <h4 class="collapsible-title">How tall is Hyunjin?</h4>
+                            <img src="assets/down-arrow.png" alt="Expand" class="collapsible-toggle">
+                        </div>
+                            <div class="collapsible-content">
+                                <span class="collapsible-value">Hyunjin is 1.79 meters tall, making him the tallest member in Stray Kids</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="collapsible-fact-item" data-collapsible-id="custom3">
+                        <div class="collapsible-header">
+                            <h4 class="collapsible-title">How old is Hyunjin?</h4>
+                            <img src="assets/down-arrow.png" alt="Expand" class="collapsible-toggle">
+                        </div>
+                            <div class="collapsible-content">
+                                <span class="collapsible-value">Hyunjin is 26 years old.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="image-library-panel">
+                <h3>Image Library</h3>
+                <button id="addImageBtn" class="btn btn-primary btn-small">Add Image</button>
+                <div id="imageLibrary" class="image-library-grid"></div>
+            </div>
+    </div>
+
+    <input type="file" id="imageInput" accept="image/png,image/jpeg,image/webp" style="display: none;">
+    <input type="file" id="projectImportInput" accept=".json" style="display: none;">
+
+    <script src="storage.js"></script>
+    <script src="history.js"></script>
+    <script src="images.js"></script>
+    <script src="export.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
