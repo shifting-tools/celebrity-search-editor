@@ -1,12 +1,12 @@
 const STORAGE_KEYS = {
     VARIABLES: 'celebrity_editor_variables',
-    IMAGES: 'celebrity_editor_images',
-    CUSTOM_QUESTIONS: 'celebrity_editor_custom_questions'
+    IMAGES: 'celebrity_editor_images'
 };
 
 const DEFAULT_VARIABLES = {
     fname: "Hyunjin",
     lname: "Hwang",
+    name: "Hyunjin",
     age: "26",
     occupation: "Rapper, Singer",
     location: "Seoul, South Korea",
@@ -24,12 +24,12 @@ const DEFAULT_VARIABLES = {
     article2Text: "Hwang Hyun-jin - Instagram",
     article1Date: "31 Oct 2025",
     article2Date: "15 Oct 2025",
-    question1Title: "What languages can Hyunjin speak?",
-    question1Value: "Hyunjin can speak Korean fluently, and has learnt English and Japanese through study.",
-    question2Title: "How tall is Hyunjin?",
-    question2Value: "Hyunjin is 1.79 meters tall, making him the tallest member in Stray Kids",
-    question3Title: "How old is Hyunjin?",
-    question3Value: "Hyunjin is 26 years old.",
+    custom1Title: "What languages can Hyunjin speak?",
+    custom1Value: "Hyunjin can speak Korean fluently, and has learnt English and Japanese through study.",
+    custom2Title: "How tall is Hyunjin?",
+    custom2Value: "Hyunjin is 1.79 meters tall, making him the tallest member in Stray Kids",
+    custom3Title: "How old is Hyunjin?",
+    custom3Value: "Hyunjin is 26 years old.",
 };
 
 const DEFAULT_IMAGES = {
@@ -39,25 +39,9 @@ const DEFAULT_IMAGES = {
     image3: null
 };
 
-const DEFAULT_CUSTOM_QUESTIONS = {
-    custom1: {
-        title: "What languages can Hyunjin speak?",
-        value: "Hyunjin can speak Korean fluently, and has learnt English and Japanese through study."
-    },
-    custom2: {
-        title: "How tall is Hyunjin?",
-        value: "Hyunjin is 1.79 meters tall, making him the tallest member in Stray Kids"
-    },
-    custom3: {
-        title: "How old is Hyunjin?",
-        value: "Hyunjin is 26 years old."
-    }
-};
-
 let appState = {
     variables: { ...DEFAULT_VARIABLES },
-    images: { ...DEFAULT_IMAGES },
-    customQuestions: { ...DEFAULT_CUSTOM_QUESTIONS }
+    images: { ...DEFAULT_IMAGES }
 };
 
 function loadFromLocalStorage() {
@@ -71,11 +55,6 @@ function loadFromLocalStorage() {
         if (savedImages) {
             appState.images = { ...DEFAULT_IMAGES, ...JSON.parse(savedImages) };
         }
-        
-        const savedCustomQuestions = localStorage.getItem(STORAGE_KEYS.CUSTOM_QUESTIONS);
-        if (savedCustomQuestions) {
-            appState.customQuestions = { ...DEFAULT_CUSTOM_QUESTIONS, ...JSON.parse(savedCustomQuestions) };
-        }
     } catch (error) {
         console.error('Error loading from localStorage:', error);
     }
@@ -85,7 +64,6 @@ function saveToLocalStorage() {
     try {
         localStorage.setItem(STORAGE_KEYS.VARIABLES, JSON.stringify(appState.variables));
         localStorage.setItem(STORAGE_KEYS.IMAGES, JSON.stringify(appState.images));
-        localStorage.setItem(STORAGE_KEYS.CUSTOM_QUESTIONS, JSON.stringify(appState.customQuestions));
     } catch (error) {
         console.error('Error saving to localStorage:', error);
     }

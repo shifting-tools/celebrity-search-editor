@@ -35,6 +35,15 @@ function setupVariablesPanel() {
     });
 }
 
+function updateVariablesPanel() {
+    const panelInputs = document.querySelectorAll('.variables-panel [data-variable]');
+    
+    panelInputs.forEach(input => {
+        const variableName = input.dataset.variable;
+        input.value = appState.variables[variableName] || '';
+    });
+}
+
 function setupTextEditing() {
     const textElements = document.querySelectorAll('[data-variable]');
     
@@ -138,15 +147,14 @@ function renderCustomQuestions() {
     
     collapsibleItems.forEach(item => {
         const collapsibleId = item.dataset.collapsibleId;
-        const questionData = appState.customQuestions[collapsibleId];
+        const titleVariable = `${collapsibleId}Title`;
+        const valueVariable = `${collapsibleId}Value`;
         
-        if (questionData) {
-            const titleElement = item.querySelector('.collapsible-title');
-            const valueElement = item.querySelector('.collapsible-value');
-            
-            if (titleElement) titleElement.textContent = questionData.title;
-            if (valueElement) valueElement.textContent = questionData.value;
-        }
+        const titleElement = item.querySelector('.collapsible-title');
+        const valueElement = item.querySelector('.collapsible-value');
+        
+        if (titleElement) titleElement.textContent = appState.variables[titleVariable];
+        if (valueElement) valueElement.textContent = appState.variables[valueVariable];
     });
 }
 
@@ -155,6 +163,8 @@ function setupCustomQuestionsEditing() {
     
     collapsibleItems.forEach(item => {
         const collapsibleId = item.dataset.collapsibleId;
+        const titleVariable = `${collapsibleId}Title`;
+        const valueVariable = `${collapsibleId}Value`;
         const titleElement = item.querySelector('.collapsible-title');
         const valueElement = item.querySelector('.collapsible-value');
         
@@ -162,7 +172,7 @@ function setupCustomQuestionsEditing() {
         titleElement.onclick = (e) => {
             if (titleElement.classList.contains('editable')) return;
             
-            const currentValue = appState.customQuestions[collapsibleId].title;
+            const currentValue = appState.variables[titleVariable];
             
             titleElement.classList.add('editable');
             titleElement.contentEditable = true;
@@ -172,9 +182,9 @@ function setupCustomQuestionsEditing() {
             const saveEdit = () => {
                 const newValue = titleElement.textContent.trim();
                 if (newValue === '') {
-                    appState.customQuestions[collapsibleId].title = DEFAULT_CUSTOM_QUESTIONS[collapsibleId].title;
+                    appState.variables[titleVariable] = DEFAULT_VARIABLES[titleVariable];
                 } else {
-                    appState.customQuestions[collapsibleId].title = newValue;
+                    appState.variables[titleVariable] = newValue;
                 }
                 saveToLocalStorage();
                 saveStateToHistory();
@@ -202,7 +212,7 @@ function setupCustomQuestionsEditing() {
         valueElement.onclick = (e) => {
             if (valueElement.classList.contains('editable')) return;
             
-            const currentValue = appState.customQuestions[collapsibleId].value;
+            const currentValue = appState.variables[valueVariable];
             
             valueElement.classList.add('editable');
             valueElement.contentEditable = true;
@@ -212,9 +222,9 @@ function setupCustomQuestionsEditing() {
             const saveEdit = () => {
                 const newValue = valueElement.textContent.trim();
                 if (newValue === '') {
-                    appState.customQuestions[collapsibleId].value = DEFAULT_CUSTOM_QUESTIONS[collapsibleId].value;
+                    appState.variables[valueVariable] = DEFAULT_VARIABLES[valueVariable];
                 } else {
-                    appState.customQuestions[collapsibleId].value = newValue;
+                    appState.variables[valueVariable] = newValue;
                 }
                 saveToLocalStorage();
                 saveStateToHistory();

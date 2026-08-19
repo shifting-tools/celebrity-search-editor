@@ -219,6 +219,7 @@ async function importProject(file) {
         
         saveToLocalStorage();
         saveStateToHistory();
+        updateVariablesPanel();
         renderTemplate();
         renderImageLibrary();
         
