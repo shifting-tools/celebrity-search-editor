@@ -22,16 +22,33 @@ function setupVariablesPanel() {
     panelInputs.forEach(input => {
         const variableName = input.dataset.variable;
         input.value = appState.variables[variableName] || '';
+        input.dataset.needsRefresh = 'false';
         
         input.addEventListener('input', () => {
+            input.dataset.needsRefresh = 'true';
             appState.variables[variableName] = input.value;
             saveToLocalStorage();
             renderTemplate();
         });
-        
-        input.addEventListener('change', () => {
+
+        const commitVariableInput = () => {
+            if (input.dataset.needsRefresh !== 'true') return;
+
+            let nextValue = input.value;
+            if (!nextValue || nextValue.trim() === '') {
+                nextValue = appState.variables[variableName] || '';
+                input.value = nextValue;
+            }
+
+            appState.variables[variableName] = nextValue;
+            saveToLocalStorage();
+            renderTemplate();
             saveStateToHistory();
-        });
+            input.dataset.needsRefresh = 'false';
+        };
+        
+        input.addEventListener('change', commitVariableInput);
+        input.addEventListener('blur', commitVariableInput);
     });
 }
 

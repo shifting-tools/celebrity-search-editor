@@ -1,3 +1,77 @@
+function isValidInternalImageId(value) {
+    return typeof value === 'string' && /^img_[A-Za-z0-9]+$/.test(value);
+}
+
+function sanitizeImportedProjectImageState(imageState) {
+    const safeState = {};
+    const validKeys = Object.keys(DEFAULT_IMAGES || {});
+
+    for (const key of validKeys) {
+        const value = imageState && imageState[key];
+
+        if (value === null || value === undefined || value === '') {
+            safeState[key] = null;
+            continue;
+        }
+
+        if (!isValidInternalImageId(value)) {
+            safeState[key] = null;
+            continue;
+        }
+
+        safeState[key] = value;
+    }
+
+    return safeState;
+}
+
+function sanitizeImportedProjectData(projectData) {
+    if (!projectData || typeof projectData !== 'object') {
+        return null;
+    }
+
+    if (!projectData.variables || typeof projectData.variables !== 'object') {
+        return null;
+    }
+
+    if (!projectData.images || typeof projectData.images !== 'object') {
+        return null;
+    }
+
+    const sanitizedImages = sanitizeImportedProjectImageState(projectData.images);
+    const sanitizedEmbeddedImages = {};
+
+    if (projectData.embeddedImages && typeof projectData.embeddedImages === 'object') {
+        for (const [imageId, dataURL] of Object.entries(projectData.embeddedImages)) {
+            if (!isValidInternalImageId(imageId)) {
+                continue;
+            }
+
+            if (typeof dataURL !== 'string' || !/^data:image\//i.test(dataURL)) {
+                continue;
+            }
+
+            sanitizedEmbeddedImages[imageId] = dataURL;
+        }
+    }
+
+    for (const slot of Object.keys(sanitizedImages)) {
+        const imageId = sanitizedImages[slot];
+        if (imageId && !Object.prototype.hasOwnProperty.call(sanitizedEmbeddedImages, imageId)) {
+            const isKnownLocalImage = isValidInternalImageId(imageId);
+            if (!isKnownLocalImage) {
+                sanitizedImages[slot] = null;
+            }
+        }
+    }
+
+    return {
+        variables: projectData.variables,
+        images: sanitizedImages,
+        embeddedImages: sanitizedEmbeddedImages
+    };
+}
+
 async function exportToPNG() {
     const canvas = document.getElementById('previewCanvas');
     if (!canvas) {
@@ -197,17 +271,18 @@ async function importProject(file) {
     try {
         const text = await file.text();
         const projectData = JSON.parse(text);
-        
-        if (!projectData.variables || !projectData.images) {
+        const sanitizedProject = sanitizeImportedProjectData(projectData);
+
+        if (!sanitizedProject) {
             alert('Invalid project file.');
             return;
         }
         
-        appState.variables = { ...DEFAULT_VARIABLES, ...projectData.variables };
-        appState.images = { ...DEFAULT_IMAGES, ...projectData.images };
+        appState.variables = { ...DEFAULT_VARIABLES, ...sanitizedProject.variables };
+        appState.images = { ...DEFAULT_IMAGES, ...sanitizedProject.images };
         
-        if (projectData.embeddedImages) {
-            for (const [imageId, dataURL] of Object.entries(projectData.embeddedImages)) {
+        if (sanitizedProject.embeddedImages) {
+            for (const [imageId, dataURL] of Object.entries(sanitizedProject.embeddedImages)) {
                 try {
                     const blob = await dataURLToBlob(dataURL);
                     await saveImageToIndexedDB(imageId, blob);

@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celebrity Search Editor</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Celebrity Search Editor - Actor</title>
+    <link rel="stylesheet" href="actor.css">
 </head>
 <body>
-    <div class="links">
-        <a href="index.html" class="website-link">Music template</a>
-        <a href="instaprofile.html" class="website-link">Instagram profile template</a>
-        <a href="instapost.html" class="website-link">Instagram post template</a>
-    </div>
-    <div class="app-container">
+    <div class="main-wrapper">
+        <div class="links">
+            <a href="../../index.html" class="website-link">Singer Google search</a>
+            <a href="../insta-profile/instaprofile.html" class="website-link">Instagram profile template</a>
+            <a href="../insta-post/instapost.html" class="website-link">Instagram post template</a>
+            <a href="../tiktok-profile/tiktokprofile.html" class="website-link">TikTok profile template</a>
+        </div>
+        <div class="app-container">
         <header class="app-header">
             <h1>Celebrity Search Editor - actor dr</h1>
             <div class="toolbar">
@@ -65,28 +67,24 @@
                         <label for="var-height">Height</label>
                         <input type="text" id="var-height" data-variable="height">
                     </div>
-                    <div class="form-group">
-                        <label for="var-group">Music Group</label>
-                        <input type="text" id="var-group" data-variable="group">
-                    </div>
                 </div>
             </div>
             <div id="previewCanvas" class="preview-canvas">
                 <div class="top-image-row">
                     <div class="image-row-middle">
-                        <img src="assets/google.png" alt="Google" class="top-row-image">
+                        <img src="../../assets/google.png" alt="Google" class="top-row-image">
                     </div>
                     <div class="image-row-right">
-                            <img src="assets/user-profile.png" alt="Account" class="top-row-image">
+                            <img src="../../assets/user-profile.png" alt="Account" class="top-row-image">
                         </div>
                     </div>
                     <div class="search-header">
                         <div class="search-bar">
-                            <img src="assets/magnifying-glass-thin.png" alt="Search" class="search-icon-img">
+                            <img src="../../assets/magnifying-glass-thin.png" alt="Search" class="search-icon-img">
                             <span class="search-text" data-variable="name">{fname} {lname}</span>
-                            <img src="assets/microphone-icon.png" alt="Clear" class="search-icon-img">
+                            <img src="../../assets/microphone-icon.png" alt="Clear" class="search-icon-img">
                             <span class="search-separator">|</span>
-                            <img src="assets/google-lens.png" alt="Voice" class="search-icon-img">
+                            <img src="../../assets/google-lens.png" alt="Voice" class="search-icon-img">
                         </div>
                     </div>
 
@@ -106,8 +104,8 @@
                                         <h2 class="celebrity-name" data-variable="name">{name}</h2>
                                     </td>
                                     <td class="celebrity-icons-cell">
-                                        <img src="assets/vertical-ellipsis.png" alt="More" class="celebrity-icon">
-                                        <img src="assets/share.png" alt="Share" class="celebrity-icon">
+                                        <img src="../../assets/vertical-ellipsis.png" alt="More" class="celebrity-icon">
+                                        <img src="../../assets/share.png" alt="Share" class="celebrity-icon">
                                     </td>
                                 </tr>
                                 <tr>
@@ -120,11 +118,11 @@
                             <div class="images-section">
                               <div class="images-grid">
                                   <div class="image-slot">
-                                     <img id="image1" class="gallery-image" src="assets/Placeholder.png" alt="Gallery 1" data-image-slot="image1">
+                                     <img id="image1" class="gallery-image" src="../../assets/Placeholder.png" alt="Gallery 1" data-image-slot="image1">
                                      <div class="image-placeholder gallery-placeholder">Click to add</div>
                                  </div>
                                  <div class="image-slot">
-                                      <img id="image2" class="gallery-image" src="assets/Placeholder.png" alt="Gallery 2" data-image-slot="image2">
+                                      <img id="image2" class="gallery-image" src="../../assets/Placeholder.png" alt="Gallery 2" data-image-slot="image2">
                                      <div class="image-placeholder gallery-placeholder">Click to add</div>
                                  </div>
                               </div>
@@ -140,25 +138,36 @@
                     </div>
                     <div class="movie-container">
                                     <h4 class="info-title">Movies and shows</h4>
-                                    <div class="songs-grid">
-                                        <div class="song-image-slot">
-                                            <img id="song1" class="song-image" src="" alt="Song 1" data-image-slot="song1">
-                                            <div class="image-placeholder song-placeholder">+</div>
+                                    <div class="show-grid">
+                                        <div class="show-card">
+                                            <div class="show-image-wrapper">
+                                                <img id="show1" class="show-image" src="assets/Placeholder.png" alt="Show 1" data-image-slot="show1">
+                                                <div class="image-placeholder show-placeholder">+</div>
+                                            </div>
                                             <div class="article-text-wrapper">
-                                            <p class="article-content">Lorem ipsum</p>
-                                            <span class="article-date" data-variable="article1Date">{article1Date}</span></div>
+                                                <p class="article-content" data-variable="movie1title">{movie1Title}</p>
+                                                <span class="article-date" data-variable="movie1Date">{movie1Date}</span>
+                                            </div>
                                         </div>
-                                        <div class="song-image-slot">
-                                            <img id="song2" class="song-image" src="" alt="Song 2" data-image-slot="song2">
-                                            <div class="image-placeholder song-placeholder">+</div>
-                                            <p class="article-content">Dolor sit amet</p>
-                                            <span class="article-date" data-variable="article1Date">{article1Date}</span>
+                                        <div class="show-card">
+                                            <div class="show-image-wrapper">
+                                                <img id="show2" class="show-image" src="assets/Placeholder.png" alt="Show 2" data-image-slot="show2">
+                                                <div class="image-placeholder show-placeholder">+</div>
+                                            </div>
+                                            <div class="article-text-wrapper">
+                                                <p class="article-content" data-variable="movie2title">{movie2Title}</p>
+                                                <span class="article-date" data-variable="movie2Date">{movie2Date}</span>
+                                            </div>
                                         </div>
-                                        <div class="song-image-slot">
-                                            <img id="song3" class="song-image" src="" alt="Song 3" data-image-slot="song3">
-                                            <div class="image-placeholder song-placeholder">+</div>
-                                            <p class="article-content">Scary Movie</p>
-                                            <span class="article-date" data-variable="article1Date">{article1Date}</span>
+                                        <div class="show-card">
+                                            <div class="show-image-wrapper">
+                                                <img id="show3" class="show-image" src="assets/Placeholder.png" alt="Show 3" data-image-slot="show3">
+                                                <div class="image-placeholder show-placeholder">+</div>
+                                            </div>
+                                            <div class="article-text-wrapper">
+                                                <p class="article-content" data-variable="movie3title">{movie3Title}</p>
+                                                <span class="article-date" data-variable="movie3Date">{movie3Date}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -174,7 +183,7 @@
                     <div class="article-row">
                                     <div class="article-container">
                                         <div class="article-image-wrapper">
-                                            <img id="articleImage1" class="article-image" src="assets/Placeholder.png" alt="Article 1" data-image-slot="articleImage1">
+                                            <img id="articleImage1" class="article-image" src="../../assets/Placeholder.png" alt="Article 1" data-image-slot="articleImage1">
                                             <div class="image-placeholder article-image-placeholder">Click to add</div>
                                         </div>
                                         <div class="article-text-wrapper">
@@ -191,7 +200,7 @@
                                     </div>
                                     <div class="article-container">
                                         <div class="article-image-wrapper">
-                                            <img id="articleImage2" class="article-image" src="assets/Placeholder.png" alt="Article 2" data-image-slot="articleImage2">
+                                            <img id="articleImage2" class="article-image" src="../../assets/Placeholder.png" alt="Article 2" data-image-slot="articleImage2">
                                             <div class="image-placeholder article-image-placeholder">Click to add</div>
                                         </div>
                                         <div class="article-text-wrapper">
@@ -214,14 +223,14 @@
                                         <h3>Quick Facts</h3>
                                     </td>
                                     <td class="celebrity-icons-cell">
-                                        <img src="assets/vertical-ellipsis.png" alt="More" class="celebrity-icon">
-                                        <img src="assets/share.png" alt="Share" class="celebrity-icon">
+                                        <img src="../../assets/vertical-ellipsis.png" alt="More" class="celebrity-icon">
+                                        <img src="../../assets/share.png" alt="Share" class="celebrity-icon">
                                     </td>
                                 </tr>
                             </table>
                         <div class="fact-item">
                             <h4>Born: </h4>
-                            <p data-variable="born">{bday} {bmonth} {byear} ({age} years), {location}</p>
+                            <span class="fact-value" data-variable="born">{bday} {bmonth} {byear} ({age} years), {location}</span>
                         </div>
                         <div class="fact-item">
                             <h4>Education: </h4>
@@ -234,10 +243,6 @@
                             <h4>Height: </h4>
                             <span class="fact-value" data-variable="height">{height}</span>
                         </div>
-                        <div class="fact-item">
-                            <h4>Music group: </h4>
-                            <span class="fact-value" data-variable="group">{group}</span>
-                        </div>
                 </div>
                 <div class="facts-section">
                     <div class="celebrity-name-cell">
@@ -245,31 +250,31 @@
                     </div>
                     <div class="collapsible-fact-item" data-collapsible-id="custom1">
                         <div class="collapsible-header">
-                            <h4 class="collapsible-title" data-variable="custom1Title">What languages can Hyunjin speak?</h4>
-                            <img src="assets/down-arrow.png" alt="Expand" class="collapsible-toggle">
+                            <h4 class="collapsible-title" data-variable="custom1Title">What languages can Chase speak?</h4>
+                            <img src="../../assets/down-arrow.png" alt="Expand" class="collapsible-toggle">
                         </div>
                             <div class="collapsible-content">
-                                <span class="collapsible-value" data-variable="custom1Value">Hyunjin can speak Korean fluently, and has learnt English and Japanese through study.</span>
+                                <span class="collapsible-value" data-variable="custom1Value">Chase can speak English fluently, and has learnt French in school.</span>
                             </div>
                         </div>
                         <hr>
                         <div class="collapsible-fact-item" data-collapsible-id="custom2">
                         <div class="collapsible-header">
-                            <h4 class="collapsible-title" data-variable="custom2Title">How tall is Hyunjin?</h4>
-                            <img src="assets/down-arrow.png" alt="Expand" class="collapsible-toggle">
+                            <h4 class="collapsible-title" data-variable="custom2Title">How tall is Chase?</h4>
+                            <img src="../../assets/down-arrow.png" alt="Expand" class="collapsible-toggle">
                         </div>
                             <div class="collapsible-content">
-                                <span class="collapsible-value" data-variable="custom2Value">Hyunjin is 1.79 meters tall, making him the tallest member in Stray Kids</span>
+                                <span class="collapsible-value" data-variable="custom2Value">Chase is 5'6" tall, or 167 cm.</span>
                             </div>
                         </div>
                         <hr>
                         <div class="collapsible-fact-item" data-collapsible-id="custom3">
                         <div class="collapsible-header">
-                            <h4 class="collapsible-title" data-variable="custom3Title">How old is Hyunjin?</h4>
-                            <img src="assets/down-arrow.png" alt="Expand" class="collapsible-toggle">
+                            <h4 class="collapsible-title" data-variable="custom3Title">How old is Chase?</h4>
+                            <img src="../../assets/down-arrow.png" alt="Expand" class="collapsible-toggle">
                         </div>
                             <div class="collapsible-content">
-                                <span class="collapsible-value" data-variable="custom3Value">Hyunjin is 26 years old.</span>
+                                <span class="collapsible-value" data-variable="custom3Value">Chase is 26 years old.</span>
                             </div>
                         </div>
                     </div>
@@ -278,18 +283,18 @@
 
             <div class="image-library-panel">
                 <h3>Image Library</h3>
-                <button id="addImageBtn" class="btn btn-primary btn-small">Add Image</button>
+                <div class="library-header-buttons">
+                    <button id="addImageBtn" class="btn btn-primary btn-small">Add Image</button>
+                    <button id="refreshLibraryBtn" class="btn btn-small">Refresh</button>
+                </div>
                 <div id="imageLibrary" class="image-library-grid"></div>
             </div>
+    </div>
     </div>
 
     <input type="file" id="imageInput" accept="image/png,image/jpeg,image/webp" style="display: none;">
     <input type="file" id="projectImportInput" accept=".json" style="display: none;">
 
-    <script src="storage.js"></script>
-    <script src="history.js"></script>
-    <script src="images.js"></script>
-    <script src="export.js"></script>
-    <script src="app.js"></script>
+    <script src="actor.js"></script>
 </body>
 </html>

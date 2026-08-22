@@ -1,0 +1,493 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background: #7c7c7c;
+    color: #262626;
+    line-height: 1.5;
+}
+
+.main-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+}
+
+.app-container {
+    max-width: 1400px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: stretch;
+}
+
+.app-header {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.app-header h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #262626;
+}
+
+.links {
+    width: 250px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+.toolbar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: 1px solid #dbdbdb;
+    background: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.btn:hover {
+    background: #fafafa;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background: #0095f6;
+    color: white;
+    border-color: #0095f6;
+}
+
+.btn-primary:hover {
+    background: #0081d6;
+}
+
+.btn-danger {
+    background: #ed4956;
+    color: white;
+    border-color: #ed4956;
+}
+
+.btn-danger:hover {
+    background: #d93d49;
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 13px;
+}
+
+.main-content {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.variables-panel {
+    width: 280px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    padding: 20px;
+    flex-shrink: 0;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+.variables-panel h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #262626;
+}
+
+.variables-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.form-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #8e8e8e;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 8px 12px;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #0095f6;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+.preview-canvas {
+    width: 375px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    overflow: hidden;
+    position: relative;
+}
+
+.insta-post {
+    background: white;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    gap: 12px;
+}
+
+.post-avatar-wrapper {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    position: relative;
+}
+
+.post-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.avatar-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #fafafa;
+    border: 1px solid #dbdbdb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #8e8e8e;
+    cursor: pointer;
+}
+
+.post-username {
+    font-size: 14px;
+    font-weight: 600;
+    color: #262626;
+    flex: 1;
+    cursor: pointer;
+}
+
+.post-options {
+    font-size: 16px;
+    color: #262626;
+    cursor: pointer;
+}
+
+.post-image-wrapper {
+    position: relative;
+    aspect-ratio: 1;
+    background: #fafafa;
+}
+
+.post-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.post-image-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #8e8e8e;
+    cursor: pointer;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+}
+
+.action-icons {
+    display: flex;
+    gap: 16px;
+}
+
+.action-icon {
+    cursor: pointer;
+    color: #262626;
+}
+
+.action-icon:hover {
+    color: #8e8e8e;
+}
+
+.bookmark {
+    cursor: pointer;
+    color: #262626;
+}
+
+.bookmark:hover {
+    color: #8e8e8e;
+}
+
+.post-stats {
+    padding: 0 12px;
+    margin-bottom: 8px;
+}
+
+.likes-count {
+    font-size: 14px;
+    font-weight: 600;
+    color: #262626;
+    cursor: pointer;
+}
+
+.post-caption {
+    padding: 0 12px;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.caption-username {
+    font-weight: 600;
+    color: #262626;
+    cursor: pointer;
+    margin-right: 4px;
+}
+
+.caption-text {
+    color: #262626;
+    cursor: pointer;
+}
+
+.post-meta {
+    padding: 0 12px;
+    margin-bottom: 12px;
+}
+
+.comments-count {
+    font-size: 14px;
+    color: #8e8e8e;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.post-date {
+    font-size: 10px;
+    color: #8e8e8e;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.image-library-panel {
+    width: 300px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    padding: 20px;
+    flex-shrink: 0;
+}
+
+.image-library-panel h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #262626;
+}
+
+.library-header-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.image-library-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* Limit library display to 10 images (5 rows x 2 cols) and make it scrollable */
+.image-library-grid {
+    --lib-item-size: 120px;
+    --lib-gap: 10px;
+    grid-auto-rows: var(--lib-item-size);
+    gap: var(--lib-gap);
+    max-height: calc((var(--lib-item-size) + var(--lib-gap)) * 5);
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.library-image-item {
+    aspect-ratio: auto;
+    height: 100%;
+}
+
+.library-image-item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.library-image-item:hover {
+    border-color: #0095f6;
+}
+
+.library-image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.library-image-item .delete-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.library-image-item:hover .delete-btn {
+    opacity: 1;
+}
+
+.library-image-item.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+.drag-over {
+    border: 2px dashed #0095f6 !important;
+    background: #e8f0fe !important;
+}
+
+.editable {
+    outline: none;
+    border: 1px dashed #0095f6;
+    background: #e8f0fe;
+    padding: 2px 4px;
+    border-radius: 2px;
+}
+
+.editable:focus {
+    border: 1px solid #0095f6;
+    background: white;
+}
+
+img[src=""] {
+    display: none;
+}
+
+.image-placeholder {
+    display: flex;
+}
+
+img:not([src=""]) ~ .image-placeholder {
+    display: none;
+}
+
+.website-link {
+    color: #1a73e8;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    word-wrap: break-word;
+}
+
+.website-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+    .main-content {
+        flex-direction: column;
+    }
+    
+    .variables-panel {
+        width: 100%;
+        max-height: none;
+    }
+    
+    .image-library-panel {
+        width: 100%;
+    }
+    
+    .preview-canvas {
+        margin: 0 auto;
+    }
+}

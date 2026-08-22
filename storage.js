@@ -36,7 +36,14 @@ const DEFAULT_IMAGES = {
     profile: null,
     image1: null,
     image2: null,
-    image3: null
+    image3: null,
+    song1: null,
+    song2: null,
+    song3: null,
+    articleImage1: null,
+    articleLogo1: null,
+    articleImage2: null,
+    articleLogo2: null
 };
 
 let appState = {
@@ -72,7 +79,6 @@ function saveToLocalStorage() {
 function resetState() {
     appState.variables = { ...DEFAULT_VARIABLES };
     appState.images = { ...DEFAULT_IMAGES };
-    appState.customQuestions = { ...DEFAULT_CUSTOM_QUESTIONS };
     saveToLocalStorage();
 }
 

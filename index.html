@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="links">
-        <a href="actor.html" class="website-link">Actor template</a>
-        <a href="instaprofile.html" class="website-link">Instagram profile template</a>
-        <a href="instapost.html" class="website-link">Instagram post template</a>
-    </div>
-    <div class="app-container">
+    <div class="main-wrapper">
+        <div class="links">
+            <a href="templates/actor/actor.html" class="website-link">Actor Google search</a>
+            <a href="templates/insta-profile/instaprofile.html" class="website-link">Instagram profile template</a>
+            <a href="templates/insta-post/instapost.html" class="website-link">Instagram post template</a>
+            <a href="templates/tiktok-profile/tiktokprofile.html" class="website-link">TikTok profile template</a>
+        </div>
+        <div class="app-container">
         <header class="app-header">
             <h1>Celebrity Search Editor - singer dr</h1>
             <div class="toolbar">
@@ -272,12 +274,16 @@
 
             <div class="image-library-panel">
                 <h3>Image Library</h3>
-                <button id="addImageBtn" class="btn btn-primary btn-small">Add Image</button>
+                <div class="library-header-buttons">
+                    <button id="addImageBtn" class="btn btn-primary btn-small">Add Image</button>
+                    <button id="refreshLibraryBtn" class="btn btn-small">Refresh</button>
+                </div>
                 <div id="imageLibrary" class="image-library-grid"></div>
             </div>
     </div>
+    </div>
 
-    <input type="file" id="imageInput" accept="image/png,image/jpeg,image/webp" style="display: none;">
+    <input type="file" id="imageInput" accept="image/png,image/jpeg,image/webp" multiple style="display: none;">
     <input type="file" id="projectImportInput" accept=".json" style="display: none;">
 
     <script src="storage.js"></script>

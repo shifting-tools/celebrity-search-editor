@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Profile Editor</title>
+    <link rel="stylesheet" href="tiktok-profile.css">
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="links">
+            <a href="../../index.html" class="website-link">Singer Google search</a>
+            <a href="../actor/actor.html" class="website-link">Actor Google search</a>
+            <a href="../insta-profile/instaprofile.html" class="website-link">Instagram Profile</a>
+            <a href="../insta-post/instapost.html" class="website-link">Instagram Post</a>
+        </div>
+        <div class="app-container">
+            <header class="app-header">
+                <h1>TikTok Profile Editor</h1>
+                <div class="toolbar">
+                    <button id="undoBtn" class="btn" title="Undo (Ctrl+Z)">↶ Undo</button>
+                    <button id="redoBtn" class="btn" title="Redo (Ctrl+Shift+Z)">↷ Redo</button>
+                    <button id="exportPngBtn" class="btn btn-primary" title="Exporting may take a moment">Export PNG</button>
+                    <button id="resetBtn" class="btn btn-danger" title="Reset Template">Reset Template</button>
+                    <button id="exportProjectBtn" class="btn">Export Project</button>
+                    <button id="importProjectBtn" class="btn">Import Project</button>
+                </div>
+            </header>
+
+            <div class="main-content">
+                <div class="variables-panel">
+                    <h3>Variables</h3>
+                    <div class="variables-form">
+                        <div class="form-group">
+                            <label for="var-username">Username</label>
+                            <input type="text" id="var-username" data-variable="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="var-displayname">Display Name</label>
+                            <input type="text" id="var-displayname" data-variable="displayname">
+                        </div>
+                        <div class="form-group">
+                            <label for="var-bio">Bio</label>
+                            <textarea id="var-bio" data-variable="bio"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="var-following">Following</label>
+                            <input type="text" id="var-following" data-variable="following">
+                        </div>
+                        <div class="form-group">
+                            <label for="var-followers">Followers</label>
+                            <input type="text" id="var-followers" data-variable="followers">
+                        </div>
+                        <div class="form-group">
+                            <label for="var-likes">Likes</label>
+                            <input type="text" id="var-likes" data-variable="likes">
+                        </div>
+                        <div class="form-group">
+                            <label>View Count Range</label>
+                            <div class="range-inputs">
+                                <input type="number" id="var-views-min" placeholder="Min" data-variable="viewsMin">
+                                <span>-</span>
+                                <input type="number" id="var-views-max" placeholder="Max" data-variable="viewsMax">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button id="randomizeViewsBtn" class="btn btn-primary btn-small">Randomize Views</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="previewCanvas" class="preview-canvas">
+                    <div class="tiktok-profile">
+                        <div class="profile-header">
+                            <div class="profile-image-wrapper">
+                                <img id="profileImage" class="profile-image" src="" alt="Profile" data-image-slot="profileImage">
+                                <div class="image-placeholder profile-placeholder">+</div>
+                            </div>
+                            <div class="profile-info">
+                                <h1 class="displayname" data-variable="displayname">{displayname}</h1>
+                                <p class="username" data-variable="username">@{username}</p>
+                            </div>
+                        </div>
+                        <div class="stats-section">
+                            <div class="stat-item">
+                                <span class="stat-value" data-variable="following">{following}</span>
+                                <span class="stat-label">Following</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value" data-variable="followers">{followers}</span>
+                                <span class="stat-label">Followers</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value" data-variable="likes">{likes}</span>
+                                <span class="stat-label">Likes</span>
+                            </div>
+                        </div>
+                        <div class="bio-section">
+                            <p class="bio" data-variable="bio">{bio}</p>
+                        </div>
+                        <div class="icons-row" aria-hidden="false">
+                            <div class="icon icon-lines" title="Layout">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                                    <g stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                                        <path d="M6 3v6" />
+                                        <path d="M12 3v6" />
+                                        <path d="M18 3v6" />
+                                        <path d="M6 13v6" />
+                                        <path d="M12 13v6" />
+                                        <path d="M18 13v6" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="icon icon-lock" title="Private">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                                    <g stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                                        <rect x="5" y="11" width="14" height="10" rx="2" />
+                                        <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="icon icon-repost" title="Repost">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                                    <g stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                                        <path d="M12 5v6" />
+                                        <path d="M8 9l4-4 4 4" />
+                                        <path d="M12 19v-6" />
+                                        <path d="M16 15l-4 4-4-4" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="icon icon-bookmark" title="Bookmark">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                                    <g stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                                        <path d="M6 3h12v18l-6-4-6 4V3z" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="icon icon-heart" title="Like">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                                    <g stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                                        <path d="M20.8 8.6c0 5.1-8.8 11-8.8 11S3.2 13.7 3.2 8.6A5 5 0 0 1 8.2 3.6c2 0 3.6 1.6 3.6 1.6s1.6-1.6 3.6-1.6a5 5 0 0 1 5 5z" />
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="videos-section">
+                            <div class="video-item">
+                                <div class="video-thumbnail-wrapper">
+                                    <img id="video1" class="video-thumbnail" src="" alt="Video 1" data-image-slot="video1">
+                                    <div class="image-placeholder video-placeholder">+</div>
+                                    <div class="video-views" data-variable="video1Views" tabindex="0">{video1Views} views</div>
+                                </div>
+                            </div>
+                            <div class="video-item">
+                                <div class="video-thumbnail-wrapper">
+                                    <img id="video2" class="video-thumbnail" src="" alt="Video 2" data-image-slot="video2">
+                                    <div class="image-placeholder video-placeholder">+</div>
+                                    <div class="video-views" data-variable="video2Views" tabindex="0">{video2Views} views</div>
+                                </div>
+                            </div>
+                            <div class="video-item">
+                                <div class="video-thumbnail-wrapper">
+                                    <img id="video3" class="video-thumbnail" src="" alt="Video 3" data-image-slot="video3">
+                                    <div class="image-placeholder video-placeholder">+</div>
+                                    <div class="video-views" data-variable="video3Views" tabindex="0">{video3Views} views</div>
+                                </div>
+                            </div>
+                            <div class="video-item">
+                                <div class="video-thumbnail-wrapper">
+                                    <img id="video4" class="video-thumbnail" src="" alt="Video 4" data-image-slot="video4">
+                                    <div class="image-placeholder video-placeholder">+</div>
+                                    <div class="video-views" data-variable="video4Views" tabindex="0">{video4Views} views</div>
+                                </div>
+                            </div>
+                            <div class="video-item">
+                                <div class="video-thumbnail-wrapper">
+                                    <img id="video5" class="video-thumbnail" src="" alt="Video 5" data-image-slot="video5">
+                                    <div class="image-placeholder video-placeholder">+</div>
+                                    <div class="video-views" data-variable="video5Views" tabindex="0">{video5Views} views</div>
+                                </div>
+                            </div>
+                            <div class="video-item">
+                                <div class="video-thumbnail-wrapper">
+                                    <img id="video6" class="video-thumbnail" src="" alt="Video 6" data-image-slot="video6">
+                                    <div class="image-placeholder video-placeholder">+</div>
+                                    <div class="video-views" data-variable="video6Views" tabindex="0">{video6Views} views</div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="tiktok-bottom-bar" role="navigation" aria-label="TikTok bottom bar">
+                            <div class="tb-item tb-home" title="Home">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                                    <g stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                                        <path d="M3 11.5L12 4l9 7.5" />
+                                        <path d="M5 21h14a1 1 0 0 0 1-1v-7H4v7a1 1 0 0 0 1 1z" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="tb-item tb-friends" title="Friends">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                                    <g stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                                        <circle cx="11" cy="7" r="4" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="tb-item tb-plus" title="Create">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                                    <g stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                                        <path d="M12 5v14" />
+                                        <path d="M5 12h14" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="tb-item tb-inbox" title="Inbox">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                                    <g stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                                        <path d="M21 15v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4" />
+                                        <path d="M7 10l5 3 5-3" />
+                                        <path d="M12 3v7" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="tb-item tb-profile active" title="Profile">
+                                <div class="tb-profile-thumb">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                                        <g stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                                            <circle cx="12" cy="8" r="3" />
+                                            <path d="M5.5 20a6.5 6.5 0 0 1 13 0" />
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                <div class="image-library-panel">
+                    <h3>Image Library</h3>
+                    <div class="library-header-buttons">
+                        <button id="addImageBtn" class="btn btn-primary btn-small">Add Image</button>
+                        <button id="refreshLibraryBtn" class="btn btn-small">Refresh</button>
+                    </div>
+                    <div id="imageLibrary" class="image-library-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="file" id="imageInput" accept="image/png,image/jpeg,image/webp" multiple style="display: none;">
+    <input type="file" id="projectImportInput" accept=".json" style="display: none;">
+
+    <script src="tiktok-profile.js"></script>
+</body>
+</html>

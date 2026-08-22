@@ -47,6 +47,16 @@ async function renderImageLibrary() {
                 e.stopPropagation();
                 if (confirm('Delete this image from library?')) {
                     await deleteImageFromIndexedDB(record.id);
+                    
+                    // Remove any references to this image from template slots
+                    for (const slot in appState.images) {
+                        if (appState.images[slot] === record.id) {
+                            appState.images[slot] = null;
+                        }
+                    }
+                    saveToLocalStorage();
+                    saveStateToHistory();
+                    renderTemplate();
                     renderImageLibrary();
                 }
             };
@@ -138,6 +148,46 @@ function handleImageUpload(file) {
     reader.readAsDataURL(file);
 }
 
+async function handleMultipleImageUpload(files) {
+    if (!files || files.length === 0) return;
+    
+    const validTypes = ['image/png', 'image/jpeg', 'image/webp'];
+    const validFiles = Array.from(files).filter(file => validTypes.includes(file.type));
+    
+    if (validFiles.length === 0) {
+        alert('Please select PNG, JPEG, or WebP images.');
+        return;
+    }
+    
+    if (validFiles.length < files.length) {
+        alert(`${files.length - validFiles.length} file(s) were skipped (invalid format).`);
+    }
+    
+    for (const file of validFiles) {
+        try {
+            const dataURL = await new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = () => reject(reader.error);
+                reader.readAsDataURL(file);
+            });
+            
+            const blob = await dataURLToBlob(dataURL);
+            const imageId = 'img_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            
+            await saveImageToIndexedDB(imageId, blob, {
+                name: file.name,
+                type: file.type,
+                size: file.size
+            });
+        } catch (error) {
+            console.error('Error uploading image:', file.name, error);
+        }
+    }
+    
+    renderImageLibrary();
+}
+
 async function loadTemplateImages() {
     const imageSlots = ['image1', 'image2', 'song1', 'song2', 'song3', 'articleImage1', 'articleLogo1', 'articleImage2', 'articleLogo2'];
     
@@ -166,15 +216,30 @@ async function loadTemplateImages() {
 function setupImageHandlers() {
     const imageInput = document.getElementById('imageInput');
     const addImageBtn = document.getElementById('addImageBtn');
+    const refreshLibraryBtn = document.getElementById('refreshLibraryBtn');
     
     addImageBtn.onclick = () => {
         currentImageSlot = null;
         imageInput.click();
     };
     
+    refreshLibraryBtn.onclick = async () => {
+        // Reload state from localStorage
+        loadFromLocalStorage();
+        // Re-render everything
+        updateVariablesPanel();
+        renderTemplate();
+        renderCustomQuestions();
+        renderImageLibrary();
+    };
+    
     imageInput.onchange = (e) => {
-        const file = e.target.files[0];
-        handleImageUpload(file);
+        const files = e.target.files;
+        if (files.length > 1) {
+            handleMultipleImageUpload(files);
+        } else if (files.length === 1) {
+            handleImageUpload(files[0]);
+        }
         imageInput.value = '';
     };
     

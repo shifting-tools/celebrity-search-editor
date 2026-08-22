@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Profile Editor</title>
+    <link rel="stylesheet" href="insta-profile.css">
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="links">
+            <a href="../../index.html" class="website-link">Singer Google search</a>
+            <a href="../actor/actor.html" class="website-link">Actor Google search</a>
+            <a href="../insta-post/instapost.html" class="website-link">Instagram Post</a>
+            <a href="../tiktok-profile/tiktokprofile.html" class="website-link">TikTok Profile</a>
+        </div>
+        <div class="app-container">
+            <header class="app-header">
+                <h1>Instagram Profile Editor</h1>
+                <div class="toolbar">
+                    <button id="undoBtn" class="btn" title="Undo (Ctrl+Z)">↶ Undo</button>
+                    <button id="redoBtn" class="btn" title="Redo (Ctrl+Shift+Z)">↷ Redo</button>
+                    <button id="exportPngBtn" class="btn btn-primary" title="Exporting may take a moment">Export PNG</button>
+                    <button id="resetBtn" class="btn btn-danger" title="Reset Template">Reset Template</button>
+                    <button id="exportProjectBtn" class="btn">Export Project</button>
+                    <button id="importProjectBtn" class="btn">Import Project</button>
+                </div>
+            </header>
+
+            <div class="main-content">
+                <div class="variables-panel">
+                    <h3>Variables</h3>
+                    <div class="variables-form">
+                        <div class="form-group">
+                            <label for="var-username">Username</label>
+                            <input type="text" id="var-username" data-variable="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="var-fullname">Full Name</label>
+                            <input type="text" id="var-fullname" data-variable="fullname">
+                        </div>
+                        <div class="form-group">
+                            <label for="var-bio">Bio</label>
+                            <textarea id="var-bio" data-variable="bio"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="var-posts">Posts</label>
+                            <input type="text" id="var-posts" data-variable="posts">
+                        </div>
+                        <div class="form-group">
+                            <label for="var-followers">Followers</label>
+                            <input type="text" id="var-followers" data-variable="followers">
+                        </div>
+                        <div class="form-group">
+                            <label for="var-following">Following</label>
+                            <input type="text" id="var-following" data-variable="following">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="previewCanvas" class="preview-canvas">
+                    <div class="insta-header">
+                        <div class="profile-topbar">
+                            <button class="settings-button" type="button" aria-label="Settings">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M19.14 12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.61-.18l-2.39.96a7.1 7.1 0 0 0-1.63-.94L14.5 2.5a.5.5 0 0 0-.5-.5h-3.99a.5.5 0 0 0-.5.5l-.35 2.5c-.58.23-1.12.55-1.63.94l-2.39-.96a.5.5 0 0 0-.61.18L2.7 9.84a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94L2.82 13.52a.5.5 0 0 0-.12.64l1.92 3.32c.14.24.42.34.61.18l2.39-.96c.51.39 1.05.71 1.63.94l.35 2.5c.04.27.25.5.5.5h3.99c.25 0 .46-.23.5-.5l.35-2.5c.58-.23 1.12-.55 1.63-.94l2.39.96c.19.16.47.06.61-.18l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58ZM12 15.5A3.5 3.5 0 1 1 12 8a3.5 3.5 0 0 1 0 7.5Z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                            <div class="profile-top-username" data-variable="username">{username}</div>
+                        </div>
+                        <div class="profile-section">
+                            <div class="profile-image-wrapper">
+                                <img id="profileImage" class="profile-image" src="" alt="Profile" data-image-slot="profileImage">
+                                <div class="image-placeholder profile-placeholder">Click to add</div>
+                            </div>
+                            <div class="profile-info">
+                                <h2 class="username" data-variable="username">{username}</h2>
+                                <div class="stats-row">
+                                    <div class="stat-item">
+                                        <span class="stat-value" data-variable="posts">{posts}</span>
+                                        <span class="stat-label">posts</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-value" data-variable="followers">{followers}</span>
+                                        <span class="stat-label">followers</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-value" data-variable="following">{following}</span>
+                                        <span class="stat-label">following</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="fullname" data-variable="fullname">{fullname}</h3>
+                        <p class="bio" data-variable="bio">{bio}</p>
+                        <div class="profile-actions">
+                                    <button class="profile-action-btn" type="button">Edit profile</button>
+                                    <button class="profile-action-btn" type="button">View archive</button>
+                        </div>
+                        <div class="story-wrapper">
+                            <div class="story-item story-item--new">
+                                <div class="story-add-button" aria-label="Add new story">
+                                    <span class="story-plus">+</span>
+                                </div>
+                                <div class="story-label story-label--new">New</div>
+                            </div>
+                            <div class="story-item">
+                                <div class="story-visual">
+                                    <img id="story1" class="story-image-slot" src="" alt="Story 1" data-image-slot="story1">
+                                    <div class="story-placeholder">Click to add</div>
+                                </div>
+                                <div class="story-label" data-variable="storyTitle1" contenteditable="true">Story 1</div>
+                            </div>
+                            <div class="story-item">
+                                <div class="story-visual">
+                                    <img id="story2" class="story-image-slot" src="" alt="Story 2" data-image-slot="story2">
+                                    <div class="story-placeholder">Click to add</div>
+                                </div>
+                                <div class="story-label" data-variable="storyTitle2" contenteditable="true">Story 2</div>
+                            </div>
+                            <div class="story-item">
+                                <div class="story-visual">
+                                    <img id="story3" class="story-image-slot" src="" alt="Story 3" data-image-slot="story3">
+                                    <div class="story-placeholder">Click to add</div>
+                                </div>
+                                <div class="story-label" data-variable="storyTitle3" contenteditable="true">Story 3</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="insta-tabs">
+                        <div class="insta-tab active" aria-label="Posts tab">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="3" y="3" width="5" height="5" rx="0.8"></rect>
+                                <rect x="10" y="3" width="5" height="5" rx="0.8"></rect>
+                                <rect x="17" y="3" width="4" height="5" rx="0.8"></rect>
+                                <rect x="3" y="10" width="5" height="5" rx="0.8"></rect>
+                                <rect x="10" y="10" width="5" height="5" rx="0.8"></rect>
+                                <rect x="17" y="10" width="4" height="5" rx="0.8"></rect>
+                                <rect x="3" y="17" width="5" height="4" rx="0.8"></rect>
+                                <rect x="10" y="17" width="5" height="4" rx="0.8"></rect>
+                                <rect x="17" y="17" width="4" height="4" rx="0.8"></rect>
+                            </svg>
+                        </div>
+                        <div class="insta-tab" aria-label="Saved tab">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M6 4.5h12a1.5 1.5 0 0 1 1.5 1.5v13.5l-7.5-5.25L4.5 19.5V6A1.5 1.5 0 0 1 6 4.5Z"></path>
+                            </svg>
+                        </div>
+                        <div class="insta-tab" aria-label="Repost tab">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M7 7h10l-2.5-2.5"></path>
+                                <path d="M17 17H7l2.5 2.5"></path>
+                                <path d="M17 7v10"></path>
+                                <path d="M7 17V7"></path>
+                            </svg>
+                        </div>
+                        <div class="insta-tab" aria-label="Profile tab">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="3.5" y="3.5" width="17" height="17" rx="2.5"></rect>
+                                <circle cx="12" cy="9.5" r="3"></circle>
+                                <path d="M6.5 17.2c1.7-2 3.3-3 5.5-3s3.8 1 5.5 3"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="insta-grid">
+                        <div class="grid-item">
+                            <img id="grid1" class="grid-image" src="" alt="Grid 1" data-image-slot="grid1">
+                            <div class="image-placeholder grid-placeholder">+</div>
+                        </div>
+                        <div class="grid-item">
+                            <img id="grid2" class="grid-image" src="" alt="Grid 2" data-image-slot="grid2">
+                            <div class="image-placeholder grid-placeholder">+</div>
+                        </div>
+                        <div class="grid-item">
+                            <img id="grid3" class="grid-image" src="" alt="Grid 3" data-image-slot="grid3">
+                            <div class="image-placeholder grid-placeholder">+</div>
+                        </div>
+                        <div class="grid-item">
+                            <img id="grid4" class="grid-image" src="" alt="Grid 4" data-image-slot="grid4">
+                            <div class="image-placeholder grid-placeholder">+</div>
+                        </div>
+                        <div class="grid-item">
+                            <img id="grid5" class="grid-image" src="" alt="Grid 5" data-image-slot="grid5">
+                            <div class="image-placeholder grid-placeholder">+</div>
+                        </div>
+                        <div class="grid-item">
+                            <img id="grid6" class="grid-image" src="" alt="Grid 6" data-image-slot="grid6">
+                            <div class="image-placeholder grid-placeholder">+</div>
+                        </div>
+                        <div class="grid-item">
+                            <img id="grid7" class="grid-image" src="" alt="Grid 7" data-image-slot="grid7">
+                            <div class="image-placeholder grid-placeholder">+</div>
+                        </div>
+                        <div class="grid-item">
+                            <img id="grid8" class="grid-image" src="" alt="Grid 8" data-image-slot="grid8">
+                            <div class="image-placeholder grid-placeholder">+</div>
+                        </div>
+                        <div class="grid-item">
+                            <img id="grid9" class="grid-image" src="" alt="Grid 9" data-image-slot="grid9">
+                            <div class="image-placeholder grid-placeholder">+</div>
+                        </div>
+                    </div>
+                    <div class="insta-bottom-bar" aria-label="Bottom navigation">
+                        <div class="bottom-nav-item active" aria-label="Home">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M3.5 10.5 12 4l8.5 6.5"></path>
+                                <path d="M5.5 9.5V19h13V9.5"></path>
+                            </svg>
+                        </div>
+                        <div class="bottom-nav-item" aria-label="Search">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="11" cy="11" r="5.5"></circle>
+                                <path d="M16 16l5 5"></path>
+                            </svg>
+                        </div>
+                        <div class="bottom-nav-item" aria-label="Reels">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="3.5" y="3.5" width="20" height="20" rx="2.5"></rect>
+                                <path d="m11 8 7 5-7 5V11Z" fill="currentColor" stroke="none"></path>
+                            </svg>
+                        </div>
+                        <div class="bottom-nav-item" aria-label="Create">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 5v14"></path>
+                                <path d="M5 12h14"></path>
+                            </svg>
+                        </div>
+                        <div class="bottom-nav-item" aria-label="Messages">
+                            <svg class="action-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </div>
+                        <div class="bottom-nav-item profile-avatar-button" aria-label="Profile image">
+                            <img id="bottomProfileImage" class="bottom-profile-image" src="" alt="Profile avatar" data-image-slot="bottomProfileImage">
+                            <div class="profile-avatar-placeholder image-placeholder">+</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="image-library-panel">
+                    <h3>Image Library</h3>
+                    <div class="library-header-buttons">
+                        <button id="addImageBtn" class="btn btn-primary btn-small">Add Image</button>
+                        <button id="refreshLibraryBtn" class="btn btn-small">Refresh</button>
+                    </div>
+                    <div id="imageLibrary" class="image-library-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="file" id="imageInput" accept="image/png,image/jpeg,image/webp" multiple style="display: none;">
+    <input type="file" id="projectImportInput" accept=".json" style="display: none;">
+
+    <script src="insta-profile.js"></script>
+</body>
+</html>
